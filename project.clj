@@ -9,10 +9,14 @@
                  [secretary "1.2.3"]
                  [compojure "1.5.0"]
                  [yogthos/config "0.8"]
-                 [ring "1.4.0"]]
+                 [ring "1.4.0"]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
+                 [toucan "1.1.0"]
+                 [migratus "1.0.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
-            [lein-less "1.7.5"]]
+            [lein-less "1.7.5"]
+            [migratus-lein "0.5.2"]]
 
   :min-lein-version "2.5.3"
 
@@ -77,4 +81,9 @@
   :uberjar-name "hasire.jar"
 
   :prep-tasks [["cljsbuild" "once" "min"]["less" "once"] "compile"]
+
+  :migratus {
+    :store :database
+    :migration-dir "migrations"
+    :db "jdbc:postgresql://localhost/hasire?user=hasire&password=198211"}
   )
