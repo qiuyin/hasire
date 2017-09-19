@@ -8,11 +8,15 @@
                  [re-com "2.1.0"]
                  [secretary "1.2.3"]
                  [compojure "1.5.0"]
+                 [ring/ring-json "0.4.0"]
                  [yogthos/config "0.8"]
                  [ring "1.4.0"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [toucan "1.1.0"]
-                 [migratus "1.0.0"]]
+                 [cheshire "5.7.0"]
+                 [migratus "1.0.0"]
+                 [cljs-ajax "0.7.2"]
+                 [day8.re-frame/http-fx "0.1.4"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-less "1.7.5"]
@@ -40,8 +44,8 @@
                    [com.cemerick/piggieback "0.2.2"]]
 
     :plugins      [[lein-figwheel "0.5.13"]
-                   [lein-doo "0.1.7"]]
-    }}
+                   [lein-doo "0.1.7"]]}}
+
 
   :cljsbuild
   {:builds
@@ -54,8 +58,8 @@
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
                     :preloads             [devtools.preload]
-                    :external-config      {:devtools/config {:features-to-install :all}}
-                    }}
+                    :external-config      {:devtools/config {:features-to-install :all}}}}
+
 
     {:id           "min"
      :source-paths ["src/cljs"]
@@ -71,8 +75,8 @@
      :compiler     {:main          hasire.runner
                     :output-to     "resources/public/js/compiled/test.js"
                     :output-dir    "resources/public/js/compiled/test/out"
-                    :optimizations :none}}
-    ]}
+                    :optimizations :none}}]}
+
 
   :main hasire.server
 
@@ -83,7 +87,6 @@
   :prep-tasks [["cljsbuild" "once" "min"]["less" "once"] "compile"]
 
   :migratus {
-    :store :database
-    :migration-dir "migrations"
-    :db "jdbc:postgresql://localhost/hasire?user=hasire&password=198211"}
-  )
+             :store :database
+             :migration-dir "migrations"
+             :db "jdbc:postgresql://localhost/hasire?user=hasire&password=198211"})

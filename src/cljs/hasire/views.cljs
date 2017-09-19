@@ -26,9 +26,9 @@
 ;; about
 
 (defn about-title []
-  [re-com/title
-   :label "This is the About Page."
-   :level :level1])
+  [re-com/button
+   :on-click #(re-frame/dispatch [:display-user-list])
+   :label "This is the About Page."])
 
 (defn link-to-home-page []
   [re-com/hyperlink-href
